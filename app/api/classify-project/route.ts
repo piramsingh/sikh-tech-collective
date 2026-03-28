@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
 
 const RULES: { tag: string; keywords: string[] }[] = [
   { tag: 'AI',             keywords: ['ai', 'ml', 'machine learning', 'gpt', 'llm', 'model', 'intelligence', 'neural', 'predict', 'classifier', 'nlp', 'chatbot'] },
@@ -17,6 +18,10 @@ const RULES: { tag: string; keywords: string[] }[] = [
 ]
 
 export async function POST(req: Request) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
   const { name, description } = await req.json()
   if (!name) return NextResponse.json({ tags: [] })
 
