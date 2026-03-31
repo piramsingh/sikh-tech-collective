@@ -12,6 +12,7 @@ export default function SignupPage() {
   const [fullName, setFullName] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault()
@@ -22,7 +23,10 @@ export default function SignupPage() {
     const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: fullName } },
+      options: {
+        data: { full_name: fullName },
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
     })
     if (signUpError) {
       setError(signUpError.message)
@@ -30,7 +34,8 @@ export default function SignupPage() {
       return
     }
 
-    router.push('/onboarding')
+    setSubmitted(true)
+    setLoading(false)
   }
 
   const inputClass = "w-full rounded-lg px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none focus:ring-1 focus:ring-white/20"
@@ -44,6 +49,13 @@ export default function SignupPage() {
         ←
       </a>
       <div className="relative w-full max-w-sm space-y-6 px-6" style={{ zIndex: 3 }}>
+        {submitted ? (
+          <div className="text-center space-y-3">
+            <h1 className="text-2xl font-semibold text-white">Check your email</h1>
+            <p className="text-zinc-400 text-sm">We sent a confirmation link to <span className="text-white">{email}</span>. Click it to activate your account.</p>
+          </div>
+        ) : (
+        <>
         <h1 className="text-2xl font-semibold text-center text-white">Create Builder Account</h1>
         <form onSubmit={handleSignup} className="space-y-4">
           <input
@@ -87,6 +99,8 @@ export default function SignupPage() {
           Already have an account?{' '}
           <a href="/login" className="text-white underline">Sign in</a>
         </p>
+        </>
+        )}
       </div>
     </div>
   )
