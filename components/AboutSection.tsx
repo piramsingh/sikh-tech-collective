@@ -8,9 +8,9 @@ const stats = [
 
 export default function AboutSection() {
   return (
-    <section className="py-32 px-6">
+    <section className="py-16 sm:py-24 md:py-32 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 lg:gap-24 items-start">
           {/* Left: Statement */}
           <FadeInUp>
             <h2

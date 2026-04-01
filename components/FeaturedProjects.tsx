@@ -40,7 +40,7 @@ export default async function FeaturedProjects() {
   if (!projects?.length) return null
 
   return (
-    <section className="py-32 px-6">
+    <section className="py-16 sm:py-24 md:py-32 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         <FadeInUp>
           <p className="text-zinc-500 text-xs tracking-[0.3em] uppercase mb-16">
@@ -48,7 +48,7 @@ export default async function FeaturedProjects() {
           </p>
         </FadeInUp>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {projects.map((project, i) => {
             const tags: string[] = project.tags ?? []
             const primaryTag = tags[0] ?? null
@@ -79,7 +79,7 @@ export default async function FeaturedProjects() {
                       }}
                     />
 
-                    <div className="p-6 flex flex-col flex-1">
+                    <div className="p-4 sm:p-6 flex flex-col flex-1">
                       {tagStyle && primaryTag && (
                         <span
                           className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium mb-3 w-fit"

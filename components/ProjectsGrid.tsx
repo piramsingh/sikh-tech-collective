@@ -97,7 +97,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
       {filtered.length === 0 ? (
         <p className="text-zinc-500 py-20 text-center">No projects match &ldquo;{query}&rdquo;</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((project, i) => {
             const gradient = CARD_GRADIENTS[i % CARD_GRADIENTS.length]
             const builders = project.project_builders.map(pb => pb.profiles).filter(Boolean)
@@ -124,7 +124,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
                         background: `linear-gradient(135deg, ${gradient.from} 0%, ${gradient.to} 100%)`,
                       }}
                     />
-                    <div className="p-6 flex flex-col flex-1">
+                    <div className="p-4 sm:p-6 flex flex-col flex-1">
                       {tagStyle && primaryTag && (
                         <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium mb-3 w-fit" style={{ color: tagStyle.color, background: tagStyle.bg }}>
                           {primaryTag}

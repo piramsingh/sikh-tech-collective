@@ -4,7 +4,7 @@ import FadeInUp from './FadeInUp'
 export default function CTASection() {
   return (
     <section
-      className="py-40 px-6 text-center relative overflow-hidden"
+      className="py-20 sm:py-28 md:py-40 px-4 sm:px-6 text-center relative overflow-hidden"
       style={{
         background:
           'radial-gradient(ellipse at 50% 60%, #1a1208 0%, #110c04 45%, #0a0a0a 100%)',
@@ -30,7 +30,7 @@ export default function CTASection() {
         </FadeInUp>
 
         <FadeInUp delay={200}>
-          <p className="text-zinc-400 text-lg leading-relaxed mb-12 max-w-md mx-auto">
+          <p className="text-zinc-400 text-base sm:text-lg leading-relaxed mb-12 max-w-md mx-auto">
             Applications for Cohort 4 are open. Build something that matters.
           </p>
         </FadeInUp>

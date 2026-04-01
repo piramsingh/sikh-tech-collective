@@ -7,7 +7,7 @@ interface PageHeroProps {
 
 export default function PageHero({ image, eyebrow, title, subtitle }: PageHeroProps) {
   return (
-    <section className="relative h-[62vh] min-h-[460px] flex flex-col items-center justify-center overflow-hidden grain">
+    <section className="relative h-[45vh] sm:h-[55vh] md:h-[62vh] min-h-[280px] flex flex-col items-center justify-center overflow-hidden grain">
       {/* Background image */}
       <div
         className="absolute inset-0 bg-center bg-cover"
@@ -40,14 +40,14 @@ export default function PageHero({ image, eyebrow, title, subtitle }: PageHeroPr
         <h1
           className="text-white lowercase font-semibold leading-[0.92] tracking-[-0.03em]"
           style={{
-            fontSize: 'clamp(3rem, 8vw, 7rem)',
+            fontSize: 'clamp(1.8rem, 7vw, 7rem)',
             textShadow: '0 2px 40px rgba(0,0,0,0.5)',
           }}
         >
           {title}
         </h1>
         <p
-          className="mt-5 text-[17px] md:text-[20px] font-medium leading-relaxed max-w-md"
+          className="mt-5 text-[14px] sm:text-[17px] md:text-[20px] font-medium leading-relaxed max-w-md"
           style={{ color: 'rgba(255,255,255,0.75)', textShadow: '0 1px 12px rgba(0,0,0,0.6)' }}
         >
           {subtitle}

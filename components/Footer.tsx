@@ -3,10 +3,10 @@ import Link from 'next/link'
 export default function Footer() {
   return (
     <footer
-      className="px-6 md:px-10 py-16"
+      className="px-4 sm:px-6 md:px-10 py-12 md:py-16"
       style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
     >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-10">
         {/* Brand */}
         <div>
           <span

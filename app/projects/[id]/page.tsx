@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
 
       {/* Hero cover */}
       {headerImage && (
-        <div className="relative w-full overflow-hidden" style={{ height: '300px' }}>
+        <div className="relative w-full overflow-hidden h-[180px] sm:h-[240px] md:h-[300px]">
           <div
             className="absolute inset-0"
             style={{
@@ -65,7 +65,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           {/* Title overlaid bottom-left */}
           <div className="absolute bottom-0 left-0 right-0">
             <div className="max-w-[720px] mx-auto px-6 pb-6">
-              <h1 className="text-white font-semibold leading-tight" style={{ fontSize: '32px' }}>
+              <h1 className="text-white font-semibold leading-tight text-2xl sm:text-3xl md:text-[32px]">
                 {project.name}
               </h1>
             </div>

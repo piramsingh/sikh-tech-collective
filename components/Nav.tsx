@@ -35,6 +35,7 @@ export default function Nav({ breadcrumb }: NavProps = {}) {
   const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -89,8 +90,9 @@ export default function Nav({ breadcrumb }: NavProps = {}) {
   }
 
   return (
+    <>
     <nav
-      className="fixed top-0 left-0 right-0 z-50 flex items-center px-8 py-3"
+      className="fixed top-0 left-0 right-0 z-50 flex items-center px-4 md:px-8 py-3"
       style={{
         background: 'rgba(8,8,8,0.72)',
         backdropFilter: 'blur(12px)',
@@ -103,10 +105,9 @@ export default function Nav({ breadcrumb }: NavProps = {}) {
         the sikh tech collective
       </Link>
 
-      {/* Center-right: nav links, with breadcrumb replacing its matching nav link */}
-      <div className="flex items-center gap-6 text-sm font-medium mr-8">
+      {/* Center-right: nav links — hidden on mobile */}
+      <div className="hidden md:flex items-center gap-6 text-sm font-medium mr-8">
         {navLinks.map(({ href, label }) => {
-          // If breadcrumb starts with this nav link, render the full breadcrumb here instead
           const isBreadcrumbRoot = breadcrumb && breadcrumb[0]?.href === href
           if (isBreadcrumbRoot) {
             return (
@@ -140,8 +141,8 @@ export default function Nav({ breadcrumb }: NavProps = {}) {
         })}
       </div>
 
-      {/* Right: avatar or sign in */}
-      <div className="flex justify-end">
+      {/* Right: avatar or sign in — hidden on mobile */}
+      <div className="hidden md:flex justify-end">
       {user ? (
         <div className="relative" ref={dropdownRef}>
           <button
@@ -209,6 +210,60 @@ export default function Nav({ breadcrumb }: NavProps = {}) {
         </Link>
       )}
       </div>
+
+      {/* Mobile: hamburger button */}
+      <button
+        className="md:hidden flex flex-col justify-center items-center gap-1.5 w-8 h-8 focus:outline-none"
+        onClick={() => setMobileOpen(v => !v)}
+        aria-label="Toggle menu"
+      >
+        <span className="block w-5 h-px bg-white/80 transition-all" style={{ transform: mobileOpen ? 'translateY(4px) rotate(45deg)' : 'none' }} />
+        <span className="block w-5 h-px bg-white/80 transition-all" style={{ opacity: mobileOpen ? 0 : 1 }} />
+        <span className="block w-5 h-px bg-white/80 transition-all" style={{ transform: mobileOpen ? 'translateY(-4px) rotate(-45deg)' : 'none' }} />
+      </button>
     </nav>
+
+    {/* Mobile drawer */}
+    {mobileOpen && (
+      <div
+        className="fixed inset-0 z-40 flex flex-col pt-[52px]"
+        style={{ background: 'rgba(8,8,8,0.97)', backdropFilter: 'blur(12px)' }}
+      >
+        <div className="flex flex-col px-6 py-8 gap-6 text-lg font-medium">
+          {navLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setMobileOpen(false)}
+              className="text-white/80 hover:text-white transition-colors"
+            >
+              {label}
+            </Link>
+          ))}
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '24px' }}>
+            {user ? (
+              <>
+                <Link href="/dashboard" onClick={() => setMobileOpen(false)} className="block text-white/80 hover:text-white mb-4 transition-colors">
+                  Dashboard
+                </Link>
+                <button onClick={() => { handleSignOut(); setMobileOpen(false) }} className="text-zinc-400 hover:text-white transition-colors">
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setMobileOpen(false)}
+                className="inline-block px-6 py-2 rounded-full text-sm font-medium"
+                style={{ border: '1px solid rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.85)' }}
+              >
+                Sign in
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   )
 }
