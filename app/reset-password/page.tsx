@@ -24,6 +24,18 @@ export default function ResetPasswordPage() {
     setLoading(true)
     setError(null)
     const supabase = createClient()
+
+    // Check if the new password is the same as the current one
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user?.email) {
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email: user.email, password })
+      if (!signInError) {
+        setError('New password must be different from your current password')
+        setLoading(false)
+        return
+      }
+    }
+
     const { error } = await supabase.auth.updateUser({ password })
     if (error) {
       setError(error.message)
